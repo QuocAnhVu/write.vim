@@ -3,7 +3,7 @@
 function! write#start(bang)
 	setlocal spell wrap display+=lastline nolist linebreak breakindentopt=""
 	if !empty(a:bang) || &tw == 0
-		setlocal tw=0
+		setlocal tw=0 nonu nornu scl=no
 		let b:writing=2
 	else
 		let b:writing=1
@@ -20,6 +20,7 @@ function! write#stop()
 		if &tw == 0
 			setlocal tw<
 		endif
+		setlocal nonu< nornu< scl<
 	endif
 	setlocal spell< wrap< display< list< linebreak< breakindentopt<
 	let b:writing=0
