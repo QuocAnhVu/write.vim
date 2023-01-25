@@ -1,9 +1,9 @@
 " Sets the buffer as writer-friendly.
 " @param {string} bang Whether or not to force full writing mode.
 function! write#start(bang)
-	setlocal spell wrap display+=lastline nolist linebreak
+	setlocal spell wrap display+=lastline nolist linebreak breakindentopt=""
 	if !empty(a:bang) || &tw == 0
-		setlocal tw=0 nonu nornu
+		setlocal tw=0
 		let b:writing=2
 	else
 		let b:writing=1
@@ -20,9 +20,8 @@ function! write#stop()
 		if &tw == 0
 			setlocal tw<
 		endif
-		setlocal nonu< nornu<
 	endif
-	setlocal spell< wrap< display< list< linebreak<
+	setlocal spell< wrap< display< list< linebreak< breakindentopt<
 	let b:writing=0
 	silent! unmap <buffer> k
 	silent! unmap <buffer> j
